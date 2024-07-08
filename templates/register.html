@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="form-page">
+    <div class="d2h-container">
+        <h1 class="dare" >BLOG</h1>
+        <h1 class="two">WITH</h1>
+        <h2 class="hack">BLOGGERS</h2>
+    </div>
+    <div class="form-container text-sm bg-white rounded-xl bg-opacity-10 backdrop-filter backdrop-blur-sm ">
+        <form action="{% url 'register' %}" method="post" class="form">
+            {% csrf_token %}
+            {% for error in form.non_field_errors %}
+            <p class="error">{{error}}</p>
+            {% endfor %}
+            {% for field in form %}
+                <div class="fieldWrapper my-3 flex flex-col">
+                    <div class="error">{{ field.errors }}</div>
+                    {{ field.label_tag }} {{ field }}
+                </div>
+            {% endfor %}
+            <input type="submit" value="Register" class="bg-red-600 text-white text-sm font-inter font-bold px-2 ">
+            <div class="flex flex-col md:flex-row mt-4">
+                <div class="flex">
+                    <p class="w-[70%] text-[12px] md:mr-1">Already having account?</p>
+                    <div class="w-[40%]"><a href="{% url 'login' %}" class="underline text-red-800 text-[12px] ">try login</a></div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

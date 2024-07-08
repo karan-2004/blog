@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+    <nav class="w-[100vw] flex shadow-md p-3 justify-between">
+        <p class="font-poppins text-lg md:text-3xl"><a href="{% url 'home' %}">BLOGGERS POINT</a></p>
+        <div class="p-1 md:p-2">
+            
+            {% if user.is_authenticated %}
+                <div class="flex">
+                    <p class="font-poppins text-sm md:text-lg mr-3">{{user.username}}</p>
+                    <form action="{% url 'logout' %}" class="flex items-center p-0" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="cursor-pointer font-poppins text-sm md:text-lg p-0" value="logout">
+                    </form>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="font-poppins text-lg mr-3">login/signup</a>
+            {% endif %}
+                
+        </div>
+    </nav>
+    <div class="p-5">
+
+    <div class="text-md md:text-3xl font-poppins italic mb-3">
+        WRITE YOUR BLOG ...
+    </div>
+    <div class="max-h-screen w-[95%] flex justify-center items-center absolute left-[5%] top-[15%] md:static md:bg-white md:p-5 md:w-[100%]">
+        <form action="{% url 'add' %}" method="post" class="form backdrop-blur-sm">
+            {% csrf_token %}
+            {% for error in form.non_field_errors %}
+            <p class="error">{{error}}</p>
+            {% endfor %}
+            {% for field in form %}
+                <div class="fieldWrapper my-3 flex flex-col">
+                    <div class="error">{{ field.errors }}</div>
+                    {{ field.label_tag }} {{ field }}
+                </div>
+            {% endfor %}
+            <div class="flex justify-between items-center">
+                <input type="submit" value="Add" class=" bg-red-600 border-[1px] hover:cursor-pointer text-sm font-inter text-white px-2">
+            </div>
+        </form>
+    </div>
+{% endblock main %}
+    

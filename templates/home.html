@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+    <nav class="w-[100vw] flex shadow-md p-3 justify-between">
+        <p class="font-poppins text-lg md:text-3xl"><a href="{% url 'home' %}">BLOGGERS POINT</a></p>
+        <div class="p-1 md:p-2">
+            
+            {% if user.is_authenticated %}
+                <div class="flex">
+                    <p class="font-poppins text-sm md:text-lg mr-3">{{user.username}}</p>
+                    <form action="{% url 'logout' %}" class="flex items-center p-0" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="cursor-pointer font-poppins text-sm md:text-lg p-0" value="logout">
+                    </form>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="font-poppins text-lg mr-3">login/signup</a>
+            {% endif %}
+                
+        </div>
+    </nav>
+    <div class="p-5">
+            <div class="flex justify-between">
+                <div class="text-md md:text-3xl font-poppins italic mb-3">
+                    RECENT BLOG POSTS
+                </div>
+                <a href="{% url 'add' %}" class="text-sm md:text-xl text-slate-400 underline">ADD BLOG POST</a>
+            </div>
+            <div class="overflow-auto shadow-xl p-3 rounded-md h-[70vh]">
+                {% for post in page_obj %}
+                    <div class="shadow-sm p-1 rounded-sm" >
+                        <div class="font-inter text-2xl mb-1 italic">TITLE : <a href="{% url 'detail' post.slug %}" class="underline text-slate-500">{{post.title| title | truncatewords:3}}</a></div>
+                        <div class="mb-1 px-5">{{post.content | truncatewords:30}}</div>
+                        <div class="flex justify-between flex-col md:flex-row">
+                            <a href="{% url 'comments' post.slug %}" class="hover:cursor-pointer underline text-slate-400">comments</a>
+                            <div class="flex flex-col md:flex-row">
+                                <p class="mr-3">Authored by : {{post.author}}</p>
+                                <p>Published on : {{ post.published_at|date:"D d M Y" }} {{ post.published_at|time:"H:i" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mb-3">
+                {% endfor %}
+            </div>
+        
+            <div class="pagination mt-2 flex justify-center">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1" class="underline text-blue-500 mx-1">&laquo; first</a>
+                        <a href="?page={{ page_obj.previous_page_number }}" class="underline text-blue-500 mx-1">previous</a>
+                    {% endif %}
+        
+                    <span class="current mx-3">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    </span>
+        
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}" class="underline text-blue-500 mx-1">next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}" class="underline text-blue-500 mx-1">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+    </div>
+
+{% endblock main %}
+    

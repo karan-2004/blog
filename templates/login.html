@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<div class="form-page">
+    <div class="d2h-container">
+        <h1 class="dare">BLOG</h1>
+        <h1 class="two">WITH</h1>
+        <h2 class="hack">BLOGGERS</h2>
+    </div>
+    <div class="form-container">
+        <form action="{% url 'login' %}" method="post" class="form backdrop-blur-sm">
+            {% csrf_token %}
+            {% for error in form.non_field_errors %}
+            <p class="error">{{error}}</p>
+            {% endfor %}
+            {% for field in form %}
+                <div class="fieldWrapper my-3 flex flex-col">
+                    <div class="error">{{ field.errors }}</div>
+                    {{ field.label_tag }} {{ field }}
+                </div>
+            {% endfor %}
+            <div class="flex justify-between items-center">
+                <input type="submit" value="login" class=" bg-red-600 border-[1px] hover:cursor-pointer text-sm font-inter text-white px-2">
+            </div>
+            <p class="mt-4 text-[12px] text-slate-100 md:text-black">Don't have an account? <a href="{% url 'register' %}?next={{request.GET.next}}" class="text-white underline text-[13px] ml-2 md:text-red-800">Register</a></p>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
