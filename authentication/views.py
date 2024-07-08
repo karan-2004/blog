@@ -21,7 +21,7 @@ class UserRegisterView(CreateView):
     
     def get_success_url(self) -> str:
         user = self.onsucces(self.form)
-        return reverse_lazy('/')
+        return reverse_lazy('home')
     
     def onsucces(self, form: BaseModelForm):
        
