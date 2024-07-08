@@ -24,6 +24,10 @@ fieldset p {
     @apply text-slate-700;
 }
 
+textarea{
+    @apply text-black;
+}
+
 input {
     @apply p-1 opacity-[80%] text-black rounded-md;
 }

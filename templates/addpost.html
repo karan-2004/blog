@@ -25,7 +25,7 @@
     <div class="text-md md:text-3xl font-poppins italic mb-3">
         WRITE YOUR BLOG ...
     </div>
-    <div class="max-h-screen w-[95%] flex justify-center items-center absolute left-[5%] top-[15%] md:static md:bg-white md:p-5 md:w-[100%]">
+    <div class="max-h-screen w-[95%] flex justify-center items-center absolute left-[5%] top-[18%] md:static md:bg-white md:p-5 md:w-[100%]">
         <form action="{% url 'add' %}" method="post" class="form backdrop-blur-sm">
             {% csrf_token %}
             {% for error in form.non_field_errors %}

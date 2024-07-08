@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)lrzi8rupfr0$_%t4*#f3tvdx0r9@esmj5)-ghvhe&!iydv6)m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['BloggersPoint.pythonanywhere.com', 'localhost', '127.0.0.1']
 
@@ -84,14 +84,16 @@ if DEBUG:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+    STATICFILES_DIRS = [BASE_DIR/'static']
+
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'BloggersPoint$default',
-            'USER': 'karanraj1324',
-            'PASSWORD': 'Karan@2004',
-            'HOST': 'karanraj1324.mysql.pythonanywhere-services.com', # Or an IP Address that your DB is hosted on
+            'USER': 'BloggersPoint',
+            'PASSWORD': 'Narak@42',
+            'HOST': 'BloggersPoint.mysql.pythonanywhere-services.com', # Or an IP Address that your DB is hosted on
             'PORT': '3306',
         }
 }
@@ -132,7 +134,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR/'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
