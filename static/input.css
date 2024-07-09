@@ -25,7 +25,7 @@ fieldset p {
 }
 
 textarea{
-    @apply text-black;
+    @apply text-black p-1;
 }
 
 input {

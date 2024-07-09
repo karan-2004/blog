@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 from blogs.models import *
 
 # Create your views here.
@@ -30,6 +31,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
+@login_required
 def comments(request, slug):
     post_obj = Post.objects.get(slug=slug)
     if request.method == 'POST':

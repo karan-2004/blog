@@ -22,8 +22,16 @@
     </nav>
     <div class="p-5">
             <div class="flex justify-between">
-                <div class="text-md md:text-3xl font-poppins italic mb-3">
-                    RECENT BLOG POSTS
+                <div>
+                    <div class="text-md md:text-3xl font-poppins italic mb-3">
+                        RECENT BLOG POSTS
+                    </div>
+                    <form action="{% url 'home' %}">
+                        {% csrf_token %}
+                        <div class="flex">
+
+                        </div>
+                    </form>
                 </div>
                 <a href="{% url 'add' %}" class="text-sm md:text-xl text-slate-400 underline">ADD BLOG POST</a>
             </div>

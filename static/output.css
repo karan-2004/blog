@@ -560,10 +560,6 @@ video {
   left: 5%;
 }
 
-.top-\[15\%\]{
-  top: 15%;
-}
-
 .top-\[18\%\]{
   top: 18%;
 }
@@ -884,6 +880,7 @@ fieldset p{
 }
 
 textarea{
+  padding: 0.25rem;
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
